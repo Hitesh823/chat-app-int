@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatapp Direct Messages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="logo">Instagram</h1>
+                </div>
+                <div class="header-center">
+                    <h2 class="page-title">Direct Messages</h2>
+                </div>
+                <div class="header-right">
+                    <button class="new-chat-btn" aria-label="New Chat">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Chat List Sidebar -->
+            <aside class="chat-list-sidebar">
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <input type="text" class="search-input" placeholder="Search messages..." id="searchInput">
+                    </div>
+                </div>
+                
+                <div class="chat-list" id="chatList">
+                    <!-- Chat list items will be populated by JavaScript -->
+                </div>
+            </aside>
+
+            <!-- Chat Window -->
+            <main class="chat-window" id="chatWindow">
+                <div class="no-chat-selected">
+                    <div class="no-chat-content">
+                        <h3>Your Messages</h3>
+                        <p>Send private photos and messages to a friend or group.</p>
+                        <button class="btn btn--primary">Send Message</button>
+                    </div>
+                </div>
+
+                <div class="active-chat hidden" id="activeChat">
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <button class="back-btn mobile-only" id="backBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 12H5m7 7l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="chat-user-info">
+                            <img class="chat-avatar" id="chatAvatar" src="" alt="User avatar">
+                            <div class="chat-user-details">
+                                <h3 class="chat-user-name" id="chatUserName"></h3>
+                                <span class="chat-user-status" id="chatUserStatus"></span>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="action-btn" aria-label="Voice call">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                            <button class="action-btn" aria-label="Video call">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <polygon points="23 7 16 12 23 17 23 7" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Messages Area -->
+                    <div class="messages-area" id="messagesArea">
+                        <div class="messages-container" id="messagesContainer">
+                            <!-- Messages will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div class="message-input-area">
+                        <div class="input-wrapper">
+                            <button class="emoji-btn" id="emojiBtn" aria-label="Add emoji">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                            <input type="text" class="message-input" id="messageInput" placeholder="Message..." maxlength="1000">
+                            <button class="send-btn" id="sendBtn" aria-label="Send message">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2"/>
+                                    <polygon points="22,2 15,22 11,13 2,9 22,2" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Emoji Picker -->
+                        <div class="emoji-picker hidden" id="emojiPicker">
+                            <div class="emoji-grid" id="emojiGrid">
+                                <!-- Emojis will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Context Menu -->
+        <div class="context-menu hidden" id="contextMenu">
+            <button class="context-item" data-action="copy">Copy</button>
+            <button class="context-item" data-action="edit">Edit</button>
+            <button class="context-item" data-action="delete">Delete</button>
+            <button class="context-item" data-action="react">Add Reaction</button>
+        </div>
+
+        <!-- Reaction Picker -->
+        <div class="reaction-picker hidden" id="reactionPicker">
+            <div class="reaction-grid" id="reactionGrid">
+                <!-- Reactions will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
